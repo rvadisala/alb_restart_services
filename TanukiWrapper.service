@@ -1,0 +1,19 @@
+[Unit]
+Description=Tanuki Wrapper
+After=network.target systemd-user-sessions.service time-sync.target
+ 
+[Service]
+Type=forking
+User=saguser
+TimeoutStartSec=0
+KillMode=process
+ExecStart=/opt/tomcat/apache-tomcat-9.0.33/bin/startup.sh
+ExecStop=/opt/tomcat/apache-tomcat-9.0.33/bin/shutdown.sh
+#TimeoutStopSec=3min 35s
+TimeoutStartUSec=100
+TimeoutStopUSec=100
+Restart=on-failure
+RestartSec=2
+ 
+[Install]
+WantedBy=multi-user.target
